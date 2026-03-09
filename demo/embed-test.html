@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teste de Incorporação — second-order-infographic</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f1f5f9;
+      padding: 24px 16px;
+      color: #1e293b;
+    }
+    h1 { font-size: 1.1rem; margin-bottom: 8px; color: #334155; }
+    p  { font-size: 0.85rem; color: #64748b; margin-bottom: 20px; }
+
+    /* ── Wrapper responsivo ─────────────────────────────────────────── */
+    .s2i-embed-wrapper {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* Técnica padding-bottom para aspect-ratio dinâmico */
+    .s2i-embed-container {
+      position: relative;
+      width: 100%;
+      /* Altura padrão em desktop; em mobile usa min-height */
+      padding-bottom: 75%;   /* 4:3 — ajuste conforme necessário */
+      min-height: 520px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    }
+
+    .s2i-embed-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 12px;
+    }
+
+    /* Mobile: reduz padding-bottom para telas estreitas */
+    @media (max-width: 600px) {
+      .s2i-embed-container {
+        padding-bottom: 180%;  /* mais alto em mobile — conteúdo empilhado */
+        min-height: 480px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Página de teste — iframe embed</h1>
+  <p>Largura máxima: 960 px · Responsivo · Sem scroll externo</p>
+
+  <!-- ── CÓDIGO DE INCORPORAÇÃO ──────────────────────────────────────── -->
+  <div class="s2i-embed-wrapper">
+    <div class="s2i-embed-container">
+      <iframe
+        src="https://second-order-infographic.vercel.app/"
+        title="Infográfico — Sistema de 2ª Ordem"
+        loading="lazy"
+        allow="fullscreen"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+  <!-- ── FIM DO CÓDIGO DE INCORPORAÇÃO ───────────────────────────────── -->
+
+</body>
+</html>
