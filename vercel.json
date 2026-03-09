@@ -3,14 +3,18 @@
   "name": "second-order-infographic",
   "builds": [
     {
-      "src": "demo/index.html",
+      "src": "**/*",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/demo/$1"
+      "src": "^/$",
+      "dest": "/demo/index.html"
+    },
+    {
+      "src": "^/(.*)$",
+      "dest": "/$1"
     }
   ]
 }
