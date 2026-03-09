@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "name": "second-order-infographic",
+  "builds": [
+    {
+      "src": "demo/index.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/demo/$1"
+    }
+  ]
+}
