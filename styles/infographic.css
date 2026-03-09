@@ -1,0 +1,671 @@
+/**
+ * styles/infographic.css
+ * second-order-infographic — Tema visual baseado em .tema-container
+ *
+ * Paleta:  fundo #0A1924 · superfície #133B4D / #1A4D63
+ *          dourado #C99400 · verde-oliva #6B703F / #8A9050
+ *          texto #EAEFEF / #B8C4C4
+ * Tipografia: Outfit (sans) + Source Serif 4 (serif)
+ * Prefixo de namespace: s2i__
+ * Responsivo: container queries + media queries até 320 px
+ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   0. GOOGLE FONTS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   1. TOKENS DE TEMA — padrão escuro (espelha .tema-container)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.s2i__host {
+  /* ── Superfícies ── */
+  --s2i-bg:              #0A1924;
+  --s2i-surface:         #133B4D;
+  --s2i-surface-light:   #1A4D63;
+  --s2i-surface-alt:     #0f2d3d;
+
+  /* ── Texto ── */
+  --s2i-text:            #EAEFEF;
+  --s2i-text-muted:      #B8C4C4;
+  --s2i-text-label:      #B8C4C4;
+
+  /* ── Acentos ── */
+  --s2i-accent:          #C99400;
+  --s2i-accent-hover:    #e0ad1a;
+  --s2i-accent-green:    #8A9050;
+  --s2i-accent-green-dk: #6B703F;
+
+  /* ── Bordas ── */
+  --s2i-border:          rgba(234, 239, 239, 0.08);
+  --s2i-border-accent:   rgba(201, 148, 0, 0.25);
+  --s2i-border-green:    rgba(107, 112, 63, 0.30);
+
+  /* ── SVG / gráficos ── */
+  --s2i-axis:            #B8C4C4;
+  --s2i-axis-text:       #7a9099;
+  --s2i-grid:            rgba(234, 239, 239, 0.06);
+  --s2i-steady-line:     rgba(201, 148, 0, 0.35);
+  --s2i-band-fill:       rgba(201, 148, 0, 0.06);
+  --s2i-annotation:      #8A9050;
+
+  /* ── Cores por classificação ── */
+  --s2i-color-underdamped:   #C99400;
+  --s2i-color-critical:      #8A9050;
+  --s2i-color-overdamped:    #4e8fa8;
+  --s2i-color-marginal:      #b87333;
+  --s2i-color-unstable:      #8B4049;
+
+  /* ── Badges ── */
+  --s2i-badge-underdamped-bg:    rgba(201, 148, 0, 0.15);
+  --s2i-badge-underdamped-text:  #C99400;
+  --s2i-badge-critical-bg:       rgba(107, 112, 63, 0.15);
+  --s2i-badge-critical-text:     #8A9050;
+  --s2i-badge-overdamped-bg:     rgba(78, 143, 168, 0.15);
+  --s2i-badge-overdamped-text:   #4e8fa8;
+  --s2i-badge-marginal-bg:       rgba(184, 115, 51, 0.15);
+  --s2i-badge-marginal-text:     #b87333;
+  --s2i-badge-unstable-bg:       rgba(139, 64, 73, 0.15);
+  --s2i-badge-unstable-text:     #c4717a;
+
+  /* ── Tipografia ── */
+  --s2i-font:            'Outfit', sans-serif;
+  --s2i-font-serif:      'Source Serif 4', serif;
+  --s2i-font-mono:       'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ── Sombras ── */
+  --s2i-shadow-sm:       0 2px 8px rgba(0, 0, 0, 0.30);
+  --s2i-shadow:          0 8px 30px rgba(0, 0, 0, 0.40);
+
+  /* ── Raios ── */
+  --s2i-radius-sm:       6px;
+  --s2i-radius:          10px;
+  --s2i-radius-lg:       12px;
+
+  /* ── Espaçamento ── */
+  --s2i-gap:             1.5rem;
+  --s2i-gap-sm:          1rem;
+  --s2i-gap-lg:          2rem;
+}
+
+/* ── Variante light (opt-in via data-s2i-theme="light") ─────────────────── */
+
+.s2i__host[data-s2i-theme="light"] {
+  --s2i-bg:              #f4f7f9;
+  --s2i-surface:         #ffffff;
+  --s2i-surface-light:   #eef3f6;
+  --s2i-surface-alt:     #f0f4f7;
+
+  --s2i-text:            #0f2233;
+  --s2i-text-muted:      #4a6070;
+  --s2i-text-label:      #3d5566;
+
+  --s2i-accent:          #a07800;
+  --s2i-accent-hover:    #c99400;
+  --s2i-accent-green:    #5a6030;
+  --s2i-accent-green-dk: #4a5025;
+
+  --s2i-border:          rgba(15, 34, 51, 0.10);
+  --s2i-border-accent:   rgba(160, 120, 0, 0.25);
+  --s2i-border-green:    rgba(90, 96, 48, 0.30);
+
+  --s2i-axis:            #2c4a5a;
+  --s2i-axis-text:       #4a6070;
+  --s2i-grid:            rgba(15, 34, 51, 0.07);
+  --s2i-steady-line:     rgba(160, 120, 0, 0.40);
+  --s2i-band-fill:       rgba(160, 120, 0, 0.07);
+  --s2i-annotation:      #5a6030;
+
+  --s2i-color-underdamped:   #a07800;
+  --s2i-color-critical:      #5a6030;
+  --s2i-color-overdamped:    #2a6a88;
+  --s2i-color-marginal:      #8b5520;
+  --s2i-color-unstable:      #7a2030;
+
+  --s2i-badge-underdamped-bg:    rgba(160, 120, 0, 0.12);
+  --s2i-badge-underdamped-text:  #7a5c00;
+  --s2i-badge-critical-bg:       rgba(90, 96, 48, 0.12);
+  --s2i-badge-critical-text:     #4a5025;
+  --s2i-badge-overdamped-bg:     rgba(42, 106, 136, 0.12);
+  --s2i-badge-overdamped-text:   #1e5570;
+  --s2i-badge-marginal-bg:       rgba(139, 85, 32, 0.12);
+  --s2i-badge-marginal-text:     #6e3d10;
+  --s2i-badge-unstable-bg:       rgba(122, 32, 48, 0.12);
+  --s2i-badge-unstable-text:     #6a1520;
+
+  --s2i-shadow-sm:       0 1px 4px rgba(0,0,0,.08);
+  --s2i-shadow:          0 6px 20px rgba(0,0,0,.10);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   2. RESET SCOPED
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.s2i__host *,
+.s2i__host *::before,
+.s2i__host *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   3. RAIZ
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.s2i__host {
+  font-family: var(--s2i-font);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--s2i-text);
+  background-color: var(--s2i-bg);
+  border-radius: var(--s2i-radius-lg);
+  overflow: hidden;
+  position: relative;
+  container-type: inline-size;
+}
+
+/* Gradiente de fundo decorativo (espelha .tema-container::before) */
+.s2i__host::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 0%,   rgba(19, 59, 77, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 100%, rgba(107, 112, 63, 0.12) 0%, transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.s2i__root {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  animation: s2i-fadeUp 0.45s ease-out both;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   4. HEADER
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.s2i__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 1.4rem var(--s2i-gap-lg);
+  border-bottom: 1px solid var(--s2i-border);
+}
+
+.s2i__title {
+  font-family: var(--s2i-font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--s2i-text);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   5. BADGE DE CLASSIFICAÇÃO
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.s2i__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25em 0.9em;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.s2i__badge--underdamped {
+  background: var(--s2i-badge-underdamped-bg);
+  color:      var(--s2i-badge-underdamped-text);
+  border-color: var(--s2i-border-accent);
+}
+.s2i__badge--critically_damped {
+  background: var(--s2i-badge-critical-bg);
+  color:      var(--s2i-badge-critical-text);
+  border-color: var(--s2i-border-green);
+}
+.s2i__badge--overdamped {
+  background: var(--s2i-badge-overdamped-bg);
+  color:      var(--s2i-badge-overdamped-text);
+  border-color: rgba(78, 143, 168, 0.25);
+}
+.s2i__badge--marginal {
+  background: var(--s2i-badge-marginal-bg);
+  color:      var(--s2i-badge-marginal-text);
+  border-color: rgba(184, 115, 51, 0.25);
+}
+.s2i__badge--unstable {
+  background: var(--s2i-badge-unstable-bg);
+  color:      var(--s2i-badge-unstable-text);
+  border-color: rgba(139, 64, 73, 0.30);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   6. BODY — GRID PRINCIPAL
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.s2i__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr);
+  gap: var(--s2i-gap);
+  padding: var(--s2i-gap);
+}
+
+.s2i__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2i-gap);
+  min-width: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   7. PAINÉIS (caderno-card style)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.s2i__panel {
+  background: var(--s2i-surface);
+  border: 1px solid var(--s2i-border);
+  border-radius: var(--s2i-radius);
+  padding: 1.5rem 1.5rem 1.3rem;
+  box-shadow: var(--s2i-shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+}
+
+.s2i__panel:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--s2i-shadow);
+}
+
+.s2i__panel-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--s2i-accent-green);
+  background: rgba(107, 112, 63, 0.12);
+  border: 1px solid var(--s2i-border-green);
+  display: inline-block;
+  padding: 0.22em 0.75em;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   8. PAINEL DE EQUAÇÕES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.s2i__equations-container {
+  font-size: 0.92rem;
+  overflow-x: auto;
+}
+
+.s2i__eq-block {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--s2i-border);
+}
+
+.s2i__eq-block:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.s2i__eq-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--s2i-text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.s2i__eq-display {
+  overflow-x: auto;
+  padding: 0.25rem 0;
+  color: var(--s2i-text);
+  /* Scroll suave em mobile */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* MathJax: cor do texto nas equações */
+.s2i__equations-container mjx-container {
+  color: var(--s2i-text) !important;
+}
+
+.s2i__eq-params {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.2rem;
+  padding: 0.25rem 0;
+}
+
+.s2i__eq-param {
+  color: var(--s2i-text);
+  font-size: 0.88rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   9. GRÁFICOS SVG
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.s2i__plots-row {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: var(--s2i-gap-sm);
+}
+
+.s2i__plot-wrap {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.s2i__svg-container {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  min-height: 160px;
+  background: var(--s2i-surface-alt);
+  border-radius: var(--s2i-radius-sm);
+  border: 1px solid var(--s2i-border);
+  overflow: hidden;
+  /* Garante que o SVG ocupe todo o espaço do container */
+  display: flex;
+  align-items: stretch;
+}
+
+.s2i__pole-svg,
+.s2i__step-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   10. CARDS DE MÉTRICAS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.s2i__metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+}
+
+.s2i__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.9rem 1rem;
+  background: var(--s2i-surface-light);
+  border: 1px solid var(--s2i-border);
+  border-radius: var(--s2i-radius-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.s2i__card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--s2i-shadow);
+}
+
+.s2i__card-icon {
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--s2i-accent-green);
+  margin-bottom: 0.2rem;
+}
+
+.s2i__card-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--s2i-text-muted);
+  line-height: 1.2;
+}
+
+.s2i__card-sublabel {
+  font-size: 0.65rem;
+  color: var(--s2i-text-muted);
+  opacity: 0.7;
+  line-height: 1.2;
+}
+
+.s2i__card-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--s2i-text);
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.3rem;
+  line-height: 1.1;
+}
+
+.s2i__card-value--warn {
+  color: var(--s2i-color-unstable);
+}
+
+/* Borda lateral colorida por classificação */
+.s2i__card--underdamped    { border-left: 3px solid var(--s2i-color-underdamped); }
+.s2i__card--critically_damped { border-left: 3px solid var(--s2i-color-critical); }
+.s2i__card--overdamped     { border-left: 3px solid var(--s2i-color-overdamped); }
+.s2i__card--marginal       { border-left: 3px solid var(--s2i-color-marginal); }
+.s2i__card--unstable       { border-left: 3px solid var(--s2i-color-unstable); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   11. PAINEL DE RESUMO
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.s2i__summary {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--s2i-text-muted);
+}
+
+.s2i__summary-line {
+  margin-bottom: 0.7rem;
+}
+
+.s2i__summary-line:last-child {
+  margin-bottom: 0;
+}
+
+.s2i__summary strong {
+  font-weight: 600;
+  color: var(--s2i-text);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   12. RESPONSIVIDADE — CONTAINER QUERIES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Tablet / janela estreita: < 860 px ─────────────────────────────────── */
+@container (max-width: 860px) {
+  .s2i__body {
+    grid-template-columns: 1fr;
+  }
+
+  .s2i__plots-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .s2i__metrics-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ── Mobile grande: < 600 px ────────────────────────────────────────────── */
+@container (max-width: 600px) {
+  .s2i__header {
+    padding: 1rem 1.1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .s2i__title {
+    font-size: 1.1rem;
+  }
+
+  .s2i__body {
+    padding: var(--s2i-gap-sm);
+    gap: var(--s2i-gap-sm);
+  }
+
+  .s2i__panel {
+    padding: 1.1rem 1rem 1rem;
+  }
+
+  .s2i__plots-row {
+    grid-template-columns: 1fr;
+    gap: var(--s2i-gap-sm);
+  }
+
+  .s2i__svg-container {
+    aspect-ratio: 16 / 9;
+    min-height: 180px;
+  }
+
+  .s2i__metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+
+  .s2i__card {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .s2i__card-value {
+    font-size: 1rem;
+  }
+
+  .s2i__eq-params {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+}
+
+/* ── Mobile pequeno: < 400 px ───────────────────────────────────────────── */
+@container (max-width: 400px) {
+  .s2i__title {
+    font-size: 1rem;
+  }
+
+  .s2i__metrics-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .s2i__panel {
+    padding: 0.9rem 0.85rem;
+  }
+
+  .s2i__svg-container {
+    min-height: 150px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   13. MEDIA QUERIES DE FALLBACK (para browsers sem container queries)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 860px) {
+  .s2i__body {
+    grid-template-columns: 1fr;
+  }
+  .s2i__plots-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .s2i__metrics-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .s2i__header {
+    padding: 1rem 1.1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .s2i__title { font-size: 1.1rem; }
+  .s2i__body  { padding: var(--s2i-gap-sm); gap: var(--s2i-gap-sm); }
+  .s2i__panel { padding: 1.1rem 1rem 1rem; }
+  .s2i__plots-row { grid-template-columns: 1fr; }
+  .s2i__svg-container { aspect-ratio: 16 / 9; min-height: 180px; }
+  .s2i__metrics-grid  { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+  .s2i__card { padding: 0.75rem 0.85rem; }
+  .s2i__card-value { font-size: 1rem; }
+  .s2i__eq-params { flex-direction: column; gap: 0.4rem; }
+}
+
+@media (max-width: 400px) {
+  .s2i__title { font-size: 1rem; }
+  .s2i__panel { padding: 0.9rem 0.85rem; }
+  .s2i__svg-container { min-height: 150px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   14. ANIMAÇÕES (espelha fadeUp do .tema-container)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes s2i-fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Painéis com delay escalonado */
+.s2i__col--left  { animation: s2i-fadeUp 0.5s 0.05s ease-out both; }
+.s2i__col--right { animation: s2i-fadeUp 0.5s 0.12s ease-out both; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   15. SCROLLBAR CUSTOMIZADA
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.s2i__host ::-webkit-scrollbar        { width: 4px; height: 4px; }
+.s2i__host ::-webkit-scrollbar-track  { background: transparent; }
+.s2i__host ::-webkit-scrollbar-thumb  {
+  background: rgba(201, 148, 0, 0.25);
+  border-radius: 99px;
+}
+.s2i__host ::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 148, 0, 0.45);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   16. TOUCH / MOBILE — melhorias de usabilidade
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Evita zoom acidental em inputs no iOS */
+@media (max-width: 600px) {
+  .s2i__host input,
+  .s2i__host select {
+    font-size: 16px;
+  }
+}
+
+/* Área de toque mínima para cards */
+.s2i__card {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Scroll horizontal suave em equações no mobile */
+.s2i__eq-display,
+.s2i__equations-container {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
